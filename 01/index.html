@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Overlay</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        #image-container {
+            display: inline-block;
+            position: relative;
+        }
+
+        #image1, #image2, #image3 {
+            max-width: 80vw;
+        }
+
+        #image2, #image3 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="image-container">
+    <img id="image1" src="face-only.png" alt="Base Image">
+    <img id="image2" src="hospital.png" alt="Overlay Image">
+    <img id="image3" src="team.png" alt="Overlay Image">
+</div>
+<br>
+<button id="overlay-1">Show 1</button>
+<button id="overlay-2">Show 2</button>
+<button id="reset">Reset</button>
+
+<script>
+    const overlay1_button = document.getElementById('overlay-1');
+    const overlay1 = document.getElementById('image2');
+    const overlay2_button = document.getElementById('overlay-2');
+    const overlay2 = document.getElementById('image3');
+    const reset_button = document.getElementById('reset');
+
+    overlay1_button.addEventListener('click', () => {
+        overlay1.style.display = "block";
+        overlay2.style.display = "none";
+    });
+
+    overlay2_button.addEventListener('click', () => {
+        overlay1.style.display = "none";
+        overlay2.style.display = "block";
+    });
+
+    reset_button.addEventListener('click', () => {
+        overlay1.style.display = "none";
+        overlay2.style.display = "none";
+    })
+</script>
+
+</body>
+</html>
