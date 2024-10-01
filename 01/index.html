@@ -1,31 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Overlay</title>
     <style>
+        html, body {
+            height: 100%;
+            max-height: 100%;
+            overflow: auto;
+        }
         body {
             text-align: center;
             margin: 0;
-            padding: 20px;
             background-color: #f0f0f0;
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            grid-template-rows: 1fr 7fr 1fr;
+            font-family: "Noto Sans", sans-serif;
+        }
+
+        #header-text {
+            grid-area: 1/1/2/2;
         }
 
         #image-container {
             display: inline-block;
             position: relative;
+            grid-area: 2/1/3/2;
         }
 
         #image1, #image2, #image3 {
-            max-height: 70vh;
-        }
-
-        #image2, #image3 {
             position: absolute;
             top: 0;
             left: 0;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        #image2, #image3 {
             display: none;
+        }
+
+        #button-container {
+            grid-area:3/1/4/2;
+        }
+
+        #description-container {
+            text-align: left;
+            grid-area:1/2/4/3;
+            padding: 8px;
         }
 
         button {
@@ -37,19 +65,33 @@
     </style>
 </head>
 <body>
-
-    <h1>Faces & Feelings</h1>
-    <p>What does it seem like this face feeling? <br>Do those feelings change if the image changes around it?</p>
+    <div id="header-text">
+        <h1>Faces & Feelings</h1>
+    </div>
 
     <div id="image-container">
         <img id="image1" src="face-only.png" alt="Base Image">
         <img id="image2" src="hospital.png" alt="Overlay Image">
         <img id="image3" src="team.png" alt="Overlay Image">
     </div>
-    <br>
-    <button id="overlay-1">Show 1</button>
-    <button id="overlay-2">Show 2</button>
-    <button id="reset">Reset</button>
+    <div id="button-container">
+        <button id="overlay-1">Show 1</button>
+        <button id="overlay-2">Show 2</button>
+        <button id="reset">Reset</button>
+    </div>
+    <div id="description-container">
+        <p>What does it seem like this face feeling? <br>Do those feelings change if the image changes around it?</p>
+        <p>Try this: 
+            <ul>
+                <li>For each face, decide what that person is feeling. Say it to yourself, or tell a friend. </li>
+                <li>Click a button to put the face in context. Try out some different contexts; what do you think the person is feeling now? </li>
+            </ul>
+            <br>
+            Human faces are very expressive. A multitude of muscles control facial movements that show how you feel. But a facial expression doesn’t always equal emotion - for example, you can frown from anger, but also from focused concentration. 
+            <br>
+            We read so much emotion not only from a person’s face, but their context and the people around them too. To accurately read someone else’s emotion, you have to look at what they’re doing, who they’re with, and what their whole body is saying. 
+        </p>
+    </div>
 </body>
 
 <script>
