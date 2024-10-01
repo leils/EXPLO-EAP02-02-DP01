@@ -13,6 +13,7 @@
             height: 100%;
             max-height: 100%;
             overflow: auto;
+            padding: 0px 10px;
         }
         body {
             text-align: center;
@@ -29,14 +30,13 @@
         }
 
         #image-container {
+            margin-left: 48px;
             display: inline-block;
             position: relative;
             grid-area: 2/1/3/2;
         }
 
         #image1, #image2, #image3 {
-            margin-left: auto;
-            margin-right: 0;
             position: absolute;
             top: 0;
             left: 0;
@@ -55,7 +55,12 @@
         #description-container {
             text-align: left;
             grid-area:1/2/4/3;
-            padding: 8px;
+            padding: 16px;
+            font-size: 18px;
+        }
+
+        #next-container {
+            grid-area:3/2/4/3;
         }
 
         button {
@@ -64,6 +69,7 @@
             font-size: 16px;
             cursor: pointer;
         }
+
     </style>
 </head>
 <body>
@@ -73,8 +79,8 @@
 
     <div id="image-container">
         <img id="image1" src="face-only.png" alt="Base Image">
-        <img id="image2" src="protest.png" alt="Overlay Image">
-        <img id="image3" src="cheering.png" alt="Overlay Image">
+        <img id="image2" src="cheering-1.png" alt="Overlay Image">
+        <img id="image3" src="protest-1.png" alt="Overlay Image">
     </div>
     <div id="button-container">
         <button id="overlay-1">Show 1</button>
@@ -82,7 +88,7 @@
         <button id="reset">Reset</button>
     </div>
     <div id="description-container">
-        <p>What does it seem like this face feeling? <br>Do those feelings change if the image changes around it?</p>
+        <p><strong>What does it seem like this face feeling? <br>Do those feelings change if the image changes around it?</strong></p>
         <p>Try this: 
             <ul>
                 <li>For each face, decide what that person is feeling. Say it to yourself, or tell a friend. </li>
@@ -91,8 +97,13 @@
             <br>
             Human faces are very expressive. A multitude of muscles control facial movements that show how you feel. But a facial expression doesn’t always equal emotion - for example, you can frown from anger, but also from focused concentration. 
             <br>
-            We read so much emotion not only from a person’s face, but their context and the people around them too. To accurately read someone else’s emotion, you have to look at what they’re doing, who they’re with, and what their whole body is saying. 
+            <br>
+            We percieve emotion through facial expression, context and more! To accurately read someone else’s emotion, you have to look at what they’re doing, who they’re with, and what their whole body is saying. 
         </p>
+    </div>
+
+    <div id="next-container">
+        <button id="next">Try Another</button>
     </div>
 </body>
 
@@ -102,6 +113,9 @@
     const overlay2_button = document.getElementById('overlay-2');
     const overlay2 = document.getElementById('image3');
     const reset_button = document.getElementById('reset');
+
+    const next_button = document.getElementById('next');
+
 
     overlay1_button.addEventListener('click', () => {
         overlay1.style.display = "block";
@@ -117,6 +131,12 @@
         overlay1.style.display = "none";
         overlay2.style.display = "none";
     })
+
+    next_button.addEventListener('click', () => {
+        location.href = "../01";
+    })
+
+
 </script>
 
 </body>
