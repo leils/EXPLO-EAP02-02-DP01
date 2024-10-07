@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Overlay</title>
     <style>
-        html, body {
+        html,
+        body {
             height: 100%;
             max-height: 100%;
             overflow: auto;
             padding: 0px 10px;
         }
+
         body {
             text-align: center;
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: #ffe569;
             display: grid;
             grid-template-columns: 4fr 2fr;
             grid-template-rows: 1fr 7fr 1fr;
@@ -37,31 +41,39 @@
             grid-area: 2/1/3/2;
         }
 
-        #image1, #image2, #image3 {
+        #image1,
+        #image2,
+        #image3 {
             position: absolute;
             top: 0;
             left: 0;
             max-width: 100%;
             max-height: 100%;
+            border-radius: 2em;
         }
 
-        #image2, #image3 {
+        #image2,
+        #image3 {
             display: none;
         }
 
         #button-container {
-            grid-area:3/1/4/2;
+            grid-area: 3/1/4/2;
         }
 
         #description-container {
+
             text-align: left;
-            grid-area:1/2/4/3;
-            padding: 16px;
+            grid-area: 1/2/3/3;
+            margin: 34px;
+            padding: 24px;
             font-size: 2.5vh;
+            background: white;
+            border-radius: 2em;
         }
 
         #next-container {
-            grid-area:3/2/4/3;
+            grid-area: 3/2/4/3;
         }
 
         button {
@@ -69,10 +81,11 @@
             padding: 10px 20px;
             font-size: 3vh;
             cursor: pointer;
+            border-radius: 2em;
         }
-
     </style>
 </head>
+
 <body>
     <div id="header-text">
         <h1>Faces & Feelings</h1>
@@ -80,28 +93,29 @@
 
     <div id="image-container">
         <img id="image1" src="01/face-only.png" alt="Base Image">
-        <img id="image2" src="01/hospital.png" alt="Overlay Image">
-        <img id="image3" src="01/team_1.png" alt="Overlay Image">
+        <img id="image2" alt="Overlay Image">
     </div>
     <div id="button-container">
-        <button id="overlay-1">Show 1</button>
-        <button id="overlay-2">Show 2</button>
+        <button id="nextVer">Next Context</button>
         <button id="reset">Reset</button>
     </div>
     <div id="description-container">
-        <p>Try this: 
-            <ul>
-                <li>What do you think this person is feeling? </li>
-                <li>Click a button to fit the face into a new image. How would you describe this person’s feelings now?  </li>
-                <li>Try some more contexts.  What do you notice? </li>
-            </ul>
-            <br>
-            Can you tell a scream of joy from a scream of terror? Is that a frown of concentration or anger? Although faces tell part of the story, a facial expression doesn’t always equal an emotion.  To more accurately guess what someone is feeling, take a look at their body language, tone of voice, and what’s happening around them. 
+        <p>Try this:
+        <ul>
+            <li>What do you think this person is feeling? </li>
+            <li>Click a button to fit the face into a new image. How would you describe this person’s feelings now?
+            </li>
+            <li>Try some more contexts. What do you notice? </li>
+        </ul>
+        <br>
+        Can you tell a scream of joy from a scream of terror? Is that a frown of concentration or anger? Although faces
+        tell part of the story, a facial expression doesn’t always equal an emotion. To more accurately guess what
+        someone is feeling, take a look at their body language, tone of voice, and what’s happening around them.
         </p>
     </div>
 
     <div id="next-container">
-        <button id="next">Try Another</button>
+        <button id="next">Try Another Face</button>
     </div>
 </body>
 
@@ -109,55 +123,62 @@
     const photosets = [
         {
             face: "01/face-only.png",
-            v1: "01/team_1.png",
-            v2: "01/hospital.png"
+            versions: [
+                "01/team_1.png",
+                "01/hospital.png",
+                "01/yawn-1.png"
+            ]
         },
         {
             face: "02/face-only.png",
-            v1: "02/cheering-1.png",
-            v2: "02/protest-1.png"
+            versions: [
+                "02/cheer-flag.png",
+                "02/protest-1.png"
+            ]
         }
     ]
     let photoset_index = 0;
+    let version_index = 0;
     const face = document.getElementById('image1');
-    const overlay1_button = document.getElementById('overlay-1');
-    const overlay1 = document.getElementById('image2');
-    const overlay2_button = document.getElementById('overlay-2');
-    const overlay2 = document.getElementById('image3');
+    const overlay = document.getElementById('image2');
+    const nextOverlay = document.getElementById('nextVer');
     const reset_button = document.getElementById('reset');
 
     function setPhotos() {
         const photoSet = photosets[photoset_index];
         face.src = photoSet.face;
-        overlay1.src = photoSet.v1;
-        overlay2.src = photoSet.v2;
     }
 
-    const next_button = document.getElementById('next');
+    const nextFaceButton = document.getElementById('next');
 
+    nextOverlay.addEventListener('click', () => {
+        const versions = photosets[photoset_index].versions;
 
-    overlay1_button.addEventListener('click', () => {
-        overlay1.style.display = "block";
-        overlay2.style.display = "none";
-    });
+        if (overlay.style.display != "block") {
+            overlay.style.display = 'block';
+        } else {
+            console.log("hello")
+            version_index += 1;
+            if (version_index >= versions.length) {
+                version_index = 0;
+            }
+        }
 
-    overlay2_button.addEventListener('click', () => {
-        overlay1.style.display = "none";
-        overlay2.style.display = "block";
+        overlay.src = photosets[photoset_index].versions[version_index];
     });
 
     reset_button.addEventListener('click', reset)
 
     function reset() {
-        overlay1.style.display = "none";
-        overlay2.style.display = "none";
+        overlay.style.display = 'none';
+        version_index = 0;
     }
 
-    next_button.addEventListener('click', () => {
-        // location.href = "../02";
+    nextFaceButton.addEventListener('click', () => {
         photoset_index += 1;
         if (photoset_index >= photosets.length) {
             photoset_index = 0;
+            version_index = 0;
         }
         reset();
         setPhotos();
@@ -167,4 +188,5 @@
 </script>
 
 </body>
+
 </html>
