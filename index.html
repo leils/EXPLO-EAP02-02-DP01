@@ -79,9 +79,9 @@
     </div>
 
     <div id="image-container">
-        <img id="image1" src="face-only.png" alt="Base Image">
-        <img id="image2" src="hospital.png" alt="Overlay Image">
-        <img id="image3" src="team_1.png" alt="Overlay Image">
+        <img id="image1" src="01/face-only.png" alt="Base Image">
+        <img id="image2" src="01/hospital.png" alt="Overlay Image">
+        <img id="image3" src="01/team_1.png" alt="Overlay Image">
     </div>
     <div id="button-container">
         <button id="overlay-1">Show 1</button>
@@ -89,17 +89,14 @@
         <button id="reset">Reset</button>
     </div>
     <div id="description-container">
-        <p><strong>What does it seem like this face feeling? <br>Do those feelings change if the image changes around it?</strong></p>
         <p>Try this: 
             <ul>
-                <li>For each face, decide what that person is feeling. Say it to yourself, or tell a friend. </li>
-                <li>Click a button to put the face in context. Try out some different contexts; what do you think the person is feeling now? </li>
+                <li>What do you think this person is feeling? </li>
+                <li>Click a button to fit the face into a new image. How would you describe this person’s feelings now?  </li>
+                <li>Try some more contexts.  What do you notice? </li>
             </ul>
             <br>
-            Human faces are very expressive. A multitude of muscles control facial movements that show how you feel. But a facial expression doesn’t always equal emotion - for example, you can frown from anger, but also from focused concentration. 
-            <br>
-            <br>
-            We percieve emotion through facial expression, context and more! To accurately read someone else’s emotion, you have to look at what they’re doing, who they’re with, and what their whole body is saying. 
+            Can you tell a scream of joy from a scream of terror? Is that a frown of concentration or anger? Although faces tell part of the story, a facial expression doesn’t always equal an emotion.  To more accurately guess what someone is feeling, take a look at their body language, tone of voice, and what’s happening around them. 
         </p>
     </div>
 
@@ -109,11 +106,32 @@
 </body>
 
 <script>
+    const photosets = [
+        {
+            face: "01/face-only.png",
+            v1: "01/team_1.png",
+            v2: "01/hospital.png"
+        },
+        {
+            face: "02/face-only.png",
+            v1: "02/cheering-1.png",
+            v2: "02/protest-1.png"
+        }
+    ]
+    let photoset_index = 0;
+    const face = document.getElementById('image1');
     const overlay1_button = document.getElementById('overlay-1');
     const overlay1 = document.getElementById('image2');
     const overlay2_button = document.getElementById('overlay-2');
     const overlay2 = document.getElementById('image3');
     const reset_button = document.getElementById('reset');
+
+    function setPhotos() {
+        const photoSet = photosets[photoset_index];
+        face.src = photoSet.face;
+        overlay1.src = photoSet.v1;
+        overlay2.src = photoSet.v2;
+    }
 
     const next_button = document.getElementById('next');
 
@@ -128,13 +146,21 @@
         overlay2.style.display = "block";
     });
 
-    reset_button.addEventListener('click', () => {
+    reset_button.addEventListener('click', reset)
+
+    function reset() {
         overlay1.style.display = "none";
         overlay2.style.display = "none";
-    })
+    }
 
     next_button.addEventListener('click', () => {
-        location.href = "../02";
+        // location.href = "../02";
+        photoset_index += 1;
+        if (photoset_index >= photosets.length) {
+            photoset_index = 0;
+        }
+        reset();
+        setPhotos();
     })
 
 
